@@ -2,7 +2,7 @@
 
 Docker image to install and run WSO2 DemoApp. 
 
-(Docker base image thanks to ihcsim/docker-wso2esb)
+(Docker base image thanks to https://github.com/ihcsim/docker-wso2esb)
 
 ### Description
 
