@@ -1,16 +1,31 @@
 #
-# WSO2 ESB 4.8.1
+# WSO2 ESB 4.9.0 + WSO2 DSS 3.5.0 + WSO2 IS 5.1.0
 #
-FROM isim/oraclejava:1.7.0_80
-MAINTAINER Ivan Sim, ihcsim@gmail.com
+FROM java:openjdk-8-jdk
+MAINTAINER Tobias Kaatz, tobias.kaatz@gmail.com
 
-# copy zip from local folder to container
-RUN wget -P /opt https://s3-us-west-2.amazonaws.com/wso2-stratos/wso2esb-4.9.0.zip && \
-    apt-get update && \
-    apt-get install -y zip && \
-    apt-get clean && \
+RUN apt-get update && \
+    apt-get install -y zip  && \
+    apt-get clean
+
+# copy zip from WSO2 repo folder to container
+RUN wget -P /opt http://product-dist.wso2.com/products/enterprise-service-bus/4.9.0/wso2esb-4.9.0.zip && \
     unzip /opt/wso2esb-4.9.0.zip -d /opt && \
-    rm /opt/wso2esb-4.9.0.zip
+    rm /opt/wso2esb-4.9.0.zip && \
+    wget -P /opt http://product-dist.wso2.com/products/data-services-server/3.5.0/wso2dss-3.5.0.zip && \
+    unzip /opt/wso2dss-3.5.0.zip -d /opt && \
+    rm /opt/wso2dss-3.5.0.zip
+    wget -P /opt http://product-dist.wso2.com/products/identity-server/5.1.0/wso2is-5.1.0.zip && \
+    unzip /opt/wso2is-5.1.0.zip -d /opt && \
+    rm /opt/wso2is-5.1.0.zip
+    
+# set offsets
+RUN sed -i 's/<Offset>0/<Offset>1/g' /opt/wso2dss-3.5.0/repository/conf/carbon.xml && \
+    sed -i 's/<Offset>0/<Offset>2/g' /opt/wso2is-5.1.0/repository/conf/carbon.xml && \
+    
+    #sudo mysqladmin -u root -h localhost password 'mypassword'  needed
+    
 
-EXPOSE 9443 9763 8243 8280
+# EXPOSE 9443 9763 8243 8280
+EXPOSE 9443 9444 9445
 ENTRYPOINT ["/opt/wso2esb-4.9.0/bin/wso2server.sh"]
