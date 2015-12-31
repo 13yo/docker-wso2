@@ -21,7 +21,7 @@ RUN wget -P /opt http://www.kaatz.eu/wso2/wso2esb-4.9.0.zip && \
     
 # set offsets
 RUN sed -i 's/<Offset>0/<Offset>1/g' /opt/wso2dss-3.5.0/repository/conf/carbon.xml && \
-    sed -i 's/<Offset>0/<Offset>2/g' /opt/wso2is-5.1.0/repository/conf/carbon.xml && \
+    sed -i 's/<Offset>0/<Offset>2/g' /opt/wso2is-5.1.0/repository/conf/carbon.xml
     
     #sudo mysqladmin -u root -h localhost password 'mypassword'  needed
     
