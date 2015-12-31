@@ -9,13 +9,13 @@ RUN apt-get update && \
     apt-get clean
 
 # copy zip from WSO2 repo folder to container
-RUN wget -P /opt http://product-dist.wso2.com/products/enterprise-service-bus/4.9.0/wso2esb-4.9.0.zip && \
+RUN wget -P /opt http://www.kaatz.eu/wso2/wso2esb-4.9.0.zip && \
     unzip /opt/wso2esb-4.9.0.zip -d /opt && \
     rm /opt/wso2esb-4.9.0.zip && \
-    wget -P /opt http://product-dist.wso2.com/products/data-services-server/3.5.0/wso2dss-3.5.0.zip && \
+    wget -P /opt http://www.kaatz.eu/wso2/wso2dss-3.5.0.zip && \
     unzip /opt/wso2dss-3.5.0.zip -d /opt && \
     rm /opt/wso2dss-3.5.0.zip
-    wget -P /opt http://product-dist.wso2.com/products/identity-server/5.1.0/wso2is-5.1.0.zip && \
+    wget -P /opt http://www.kaatz.eu/wso2/wso2is-5.1.0.zip && \
     unzip /opt/wso2is-5.1.0.zip -d /opt && \
     rm /opt/wso2is-5.1.0.zip
     
