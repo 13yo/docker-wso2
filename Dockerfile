@@ -14,7 +14,7 @@ RUN wget -P /opt http://www.kaatz.eu/wso2/wso2esb-4.9.0.zip && \
     rm /opt/wso2esb-4.9.0.zip && \
     wget -P /opt http://www.kaatz.eu/wso2/wso2dss-3.5.0.zip && \
     unzip /opt/wso2dss-3.5.0.zip -d /opt && \
-    rm /opt/wso2dss-3.5.0.zip
+    rm /opt/wso2dss-3.5.0.zip && \
     wget -P /opt http://www.kaatz.eu/wso2/wso2is-5.1.0.zip && \
     unzip /opt/wso2is-5.1.0.zip -d /opt && \
     rm /opt/wso2is-5.1.0.zip
@@ -28,4 +28,4 @@ RUN sed -i 's/<Offset>0/<Offset>1/g' /opt/wso2dss-3.5.0/repository/conf/carbon.x
 
 # EXPOSE 9443 9763 8243 8280
 EXPOSE 9443 9444 9445
-ENTRYPOINT ["/opt/wso2esb-4.9.0/bin/wso2server.sh"]
+ENTRYPOINT ["/opt/wso2esb-4.9.0/bin/wso2server.sh > /opt/esb.log && /opt/wso2dss-4.9.0/bin/wso2server.sh > /opt/dss.log && /opt/wso2is-4.9.0/bin/wso2server.sh > /opt/is.log"]
