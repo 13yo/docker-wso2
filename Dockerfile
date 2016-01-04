@@ -32,5 +32,5 @@ RUN sed -i 's/<Offset>0/<Offset>1/g' /opt/wso2dss-3.5.0/repository/conf/carbon.x
 EXPOSE 9443 9444 9445
 # ENTRYPOINT ["/opt/wso2esb-4.9.0/bin/wso2server.sh > /opt/esb.log && /opt/wso2dss-3.5.0/bin/wso2server.sh > /opt/dss.log && /opt/wso2is-5.1.0/bin/wso2server.sh > /opt/is.log"]
 
-COPY docker-entrypoint.sh /opt/entrypoint.sh
-ENTRYPOINT ["/opt/entrypoint.sh"]
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
