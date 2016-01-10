@@ -39,5 +39,8 @@ COPY extensions/mysql-connector-java-5.1.38-bin.jar /opt/$WSO2_DSS_VERSION/repos
 COPY dss/GoogleSpreadSheet.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/server/dataservices/GoogleSpreadSheet.dbs
 COPY dss/MySQLDS.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/server/dataservices/MySQLDS.dbs
 
+#Startup script
 COPY docker-entrypoint.sh /opt/wso2startup.sh
-CMD /bin/bash /opt/wso2startup.sh
+RUN chmod 700 /opt/wso2startup.sh
+
+CMD ["/bin/bash", "-c", "/opt/wso2startup.sh"]

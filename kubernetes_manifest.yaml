@@ -10,44 +10,62 @@
   "spec": {
     "containers": [
       {
-        "name": "rdbms",
-        "image": "mysql:latest",
+        "name": "mysql",
+        "image": "mysql",
         "ports": [
           {
-            "containerPort": 3306,
+            "containerPort": 3306
+          }
+        ],
+        "env": [
+          {
+            "name": "MYSQL_ROOT_PASSWORD",
+            "value": "adminadmin"
           }
         ]
       },
       {
         "name": "wso2",
-        "image": "13yo/wso2demo",
+        "image": "13yo/wso2demo:latest",
         "ports": [
           {
-            "containerPort": 8000,
-          }, {
-            "containerPort": 9443,
-          }, {
-            "containerPort": 9763,
-          }, {
-            "containerPort": 8243,
-          }, {
-            "containerPort": 8280,
-          }, {
-            "containerPort": 9444,
-          }, {
-            "containerPort": 9764,
-          }, {
-            "containerPort": 8244,
-          }, {
-            "containerPort": 8281,
-          }, {
-            "containerPort": 9445,
-          }, {
-            "containerPort": 9765,
-          }, {
-            "containerPort": 8245,
-          }, {
-            "containerPort": 8282 ,
+            "containerPort": 8000
+          },
+          {
+            "containerPort": 9443
+          },
+          {
+            "containerPort": 9763
+          },
+          {
+            "containerPort": 8243
+          },
+          {
+            "containerPort": 8280
+          },
+          {
+            "containerPort": 9444
+          },
+          {
+            "containerPort": 9764
+          },
+          {
+            "containerPort": 8244
+          },
+          {
+            "containerPort": 8281
+          },
+          {
+            "containerPort": 9445
+          },
+          {
+            "containerPort": 9765
+          },
+          {
+            "containerPort": 8245
+          },
+          {
+            "containerPort": 8282
           }
         ]
       },
@@ -56,13 +74,13 @@
         "image": "nginx",
         "ports": [
           {
-            "containerPort": 80,
+            "containerPort": 80
           },
           {
-            "containerPort": 443,
-          },
+            "containerPort": 443
+          }
         ]
-      },
+      }
     ]
   }
 }
