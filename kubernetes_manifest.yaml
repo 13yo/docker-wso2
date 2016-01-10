@@ -1,0 +1,68 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "yenlo-cluster",
+    "labels": {
+      "app": "webapp"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "rdbms",
+        "image": "mysql:latest",
+        "ports": [
+          {
+            "containerPort": 3306,
+          }
+        ]
+      },
+      {
+        "name": "wso2",
+        "image": "13yo/wso2demo",
+        "ports": [
+          {
+            "containerPort": 8000,
+          }, {
+            "containerPort": 9443,
+          }, {
+            "containerPort": 9763,
+          }, {
+            "containerPort": 8243,
+          }, {
+            "containerPort": 8280,
+          }, {
+            "containerPort": 9444,
+          }, {
+            "containerPort": 9764,
+          }, {
+            "containerPort": 8244,
+          }, {
+            "containerPort": 8281,
+          }, {
+            "containerPort": 9445,
+          }, {
+            "containerPort": 9765,
+          }, {
+            "containerPort": 8245,
+          }, {
+            "containerPort": 8282 ,
+          }
+        ]
+      },
+      {
+        "name": "webserver",
+        "image": "nginx",
+        "ports": [
+          {
+            "containerPort": 80,
+          },
+          {
+            "containerPort": 443,
+          },
+        ]
+      },
+    ]
+  }
+}

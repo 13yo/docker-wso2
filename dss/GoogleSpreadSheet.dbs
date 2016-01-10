@@ -1,0 +1,31 @@
+<data disableStreaming="true" name="GoogleSpreadSheet">
+   <config enableOData="false" id="GSheet">
+      <property name="driverClassName">org.wso2.carbon.dataservices.sql.driver.TDriver</property>
+      <property name="url">jdbc:wso2:gspread:filePath=https://docs.google.com/spreadsheets/d/19ansUMaa4Ga0axM_Us_c57sLLwgycK5nRgRGyKpkRfA/edit?usp=sharing;sheetName=Public Stock Sheet;visibility=private;clientId=350187997686-k2c5h1u308vk4585pvtgbkujr97eph7e.apps.googleusercontent.com;clientSecret=AOrIyO8PxIQQ2AFrFsgBM8gM;refreshToken=1%2FaVtISQ-a3nrH89BafgnXgmfe-wryDx8qZ1dBbijsIh4</property>
+   </config>
+   <query id="QueryAllStock" useConfig="GSheet">
+      <sql>SELECT id,name,stock FROM stocks</sql>
+      <result outputType="json">{&#xd; "stocks": {&#xd; "entry": [&#xd; {&#xd; "ID": "$id",&#xd; "name": "$name",&#xd; "amount": "$stock"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+   </query>
+   <query id="QueryProduct" useConfig="GSheet">
+      <sql>SELECT ID, name, stock FROM stocks WHERE ID=?</sql>
+      <result outputType="json">{&#xd; "entries": {&#xd; "entry": [&#xd; {&#xd; "ID": "$ID",&#xd; "name": "$name",&#xd; "amount": "$stock"&#xd; }&#xd; ]&#xd; }&#xd;}</result>
+      <param name="ID" sqlType="INTEGER"/>
+   </query>
+   <operation name="getAllStocks">
+      <call-query href="QueryAllStock"/>
+   </operation>
+   <operation name="getProduct">
+      <call-query href="QueryProduct">
+         <with-param name="ID" query-param="ID"/>
+      </call-query>
+   </operation>
+   <resource method="GET" path="product">
+      <call-query href="QueryAllStock"/>
+   </resource>
+   <resource method="GET" path="product/{ID}">
+      <call-query href="QueryProduct">
+         <with-param name="ID" query-param="ID"/>
+      </call-query>
+   </resource>
+</data>

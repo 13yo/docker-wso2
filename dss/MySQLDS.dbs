@@ -1,0 +1,50 @@
+<data name="MySQLDS" transports="http https local">
+   <config enableOData="false" id="MyDS">
+      <property name="driverClassName">com.mysql.jdbc.Driver</property>
+      <property name="url">jdbc:mysql://mysql:3306/productsdb</property>
+      <property name="username">root</property>
+      <property name="password">adminadmin</property>
+   </config>
+   <query id="QueryAllStock" useConfig="MyDS">
+      <sql>SELECT ID,name,amount FROM products</sql>
+      <result outputType="json">{ &#xd;   "entries": { &#xd;      "entry": [&#xd;         { &#xd;            "ID": "$id",&#xd;            "name": "$name",&#xd;            "amount": "$amount"&#xd;         }&#xd;       ]&#xd;   }&#xd;}</result>
+   </query>
+   <query id="QueryProduct" useConfig="MyDS">
+      <sql>SELECT id,name,amount FROM products WHERE ID=?</sql>
+      <result outputType="json">{ &#xd;   "entries": { &#xd;      "entry": [&#xd;         { &#xd;            "ID": "$id",&#xd;            "name": "$name",&#xd;            "amount": "$amount"&#xd;         }&#xd;       ]&#xd;   }&#xd;}</result>
+      <param name="ID" sqlType="INTEGER"/>
+   </query>
+   <query id="ChangeAmount" useConfig="MyDS">
+      <sql>UPDATE products SET amount=? WHERE ID=?</sql>
+      <param name="amount" sqlType="INTEGER"/>
+      <param name="ID" sqlType="INTEGER"/>
+   </query>
+   <operation name="getAllStocks">
+      <call-query href="QueryAllStock"/>
+   </operation>
+   <operation name="getProduct">
+      <call-query href="QueryProduct">
+         <with-param name="ID" query-param="ID"/>
+      </call-query>
+   </operation>
+   <operation name="setAmount">
+      <call-query href="ChangeAmount">
+         <with-param name="amount" query-param="amount"/>
+         <with-param name="ID" query-param="ID"/>
+      </call-query>
+   </operation>
+   <resource method="GET" path="product">
+      <call-query href="QueryAllStock"/>
+   </resource>
+   <resource method="GET" path="product/{ID}">
+      <call-query href="QueryProduct">
+         <with-param name="ID" query-param="ID"/>
+      </call-query>
+   </resource>
+   <resource method="PUT" path="product/{ID}">
+      <call-query href="ChangeAmount">
+         <with-param name="amount" query-param="amount"/>
+         <with-param name="ID" query-param="ID"/>
+      </call-query>
+   </resource>
+</data>

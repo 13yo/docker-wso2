@@ -23,14 +23,20 @@ RUN wget -P /opt http://www.kaatz.eu/wso2/$WSO2_ESB_VERSION.zip && \
     wget -P /opt http://www.kaatz.eu/wso2/$WSO2_IS_VERSION.zip && \
     unzip /opt/$WSO2_IS_VERSION.zip -d /opt && \
     rm /opt/$WSO2_IS_VERSION.zip
-    
+
 # set offsets
 RUN sed -i 's/<Offset>0/<Offset>1/g' /opt/wso2dss-3.5.0/repository/conf/carbon.xml && \
     sed -i 's/<Offset>0/<Offset>2/g' /opt/wso2is-5.1.0/repository/conf/carbon.xml
 
-# EXPOSE 9443 9763 8243 8280
-EXPOSE 9443 9444 9445
+# EXPOSE ports for external use
+EXPOSE 9443 9763 8243 8280 9444 9764 8244 8281 9445 9765 8245 8282
 # ENTRYPOINT ["/opt/wso2esb-4.9.0/bin/wso2server.sh > /opt/esb.log && /opt/wso2dss-3.5.0/bin/wso2server.sh > /opt/dss.log && /opt/wso2is-5.1.0/bin/wso2server.sh > /opt/is.log"]
+
+#MySQL Connector
+COPY extensions/mysql-connector-java-5.1.38-bin.jar /opt/$WSO2_DSS_VERSION/repository/components/lib
+
+#DSS configs
+COPY dss/* /opt/$WSO2_DSS_VERSION/repository/deployment/server/dataservices
 
 COPY docker-entrypoint.sh /opt/wso2startup.sh
 CMD ["/bin/bash /opt/wso2startup.sh"]
