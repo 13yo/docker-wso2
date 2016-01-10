@@ -40,4 +40,4 @@ COPY dss/GoogleSpreadSheet.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/serv
 COPY dss/MySQLDS.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/server/dataservices/MySQLDS.dbs
 
 COPY docker-entrypoint.sh /opt/wso2startup.sh
-CMD ["/bin/bash /opt/wso2startup.sh"]
+CMD /bin/bash /opt/wso2startup.sh
