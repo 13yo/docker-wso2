@@ -43,4 +43,5 @@ COPY dss/MySQLDS.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/server/dataser
 COPY docker-entrypoint.sh /opt/wso2startup.sh
 RUN chmod 700 /opt/wso2startup.sh
 
-CMD ["/bin/bash", "-c", "/opt/wso2startup.sh"]
+# will hand that over to kubernetes
+ENTRYPOINT /opt/wso2startup.sh
