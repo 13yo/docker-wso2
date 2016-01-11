@@ -40,8 +40,8 @@ COPY dss/GoogleSpreadSheet.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/serv
 COPY dss/MySQLDS.dbs /opt/$WSO2_DSS_VERSION/repository/deployment/server/dataservices/MySQLDS.dbs
 
 #Startup script
-COPY docker-entrypoint.sh /opt/wso2startup.sh
-RUN chmod 700 /opt/wso2startup.sh
+COPY docker-entrypoint.sh /opt/startup.sh
+RUN chmod 700 /opt/startup.sh
 
 # will hand that over to kubernetes
-ENTRYPOINT /opt/wso2startup.sh
+ENTRYPOINT /opt/startup.sh
