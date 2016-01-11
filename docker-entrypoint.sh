@@ -8,14 +8,14 @@
 /opt/$WSO2_DSS_VERSION/bin/wso2server.sh > /tmp/dss.log 2> /tmp/dss_error.log &
 /opt/$WSO2_IS_VERSION/bin/wso2server.sh > /tmp/is.log 2> /tmp/is_error.log &
 
-echo "[hit enter key to exit] or run 'docker stop <container>'"
-read _
+#echo "[hit enter key to exit] or run 'docker stop <container>'"
+#read _
 
-echo "stoping esb ... "
-/opt/$WSO2_ESB_VERSION/bin/wso2server.sh stop
-echo "stoping dss ... "
-/opt/$WSO2_DSS_VERSION/bin/wso2server.sh stop
-echo "stoping is ... "
-/opt/$WSO2_IS_VERSION/bin/wso2server.sh stop
+#echo "stoping esb ... "
+#/opt/$WSO2_ESB_VERSION/bin/wso2server.sh stop
+#echo "stoping dss ... "
+#/opt/$WSO2_DSS_VERSION/bin/wso2server.sh stop
+#echo "stoping is ... "
+#/opt/$WSO2_IS_VERSION/bin/wso2server.sh stop
 
-echo "exited $0"
+#echo "exited $0"
