@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Note: I've written this using sh so it works in the busybox container too
 
 # USE the trap if you need to also do manual cleanup after the service is stopped,
@@ -10,13 +10,13 @@ trap "echo TRAPed signal" HUP INT QUIT KILL TERM
 /opt/$WSO2_IS_VERSION/bin/wso2server.sh > /tmp/is.log 2> /tmp/is_error.log &
 
 echo "[hit enter key to exit] or run 'docker stop <container>'"
-read
+read _
 
 echo "stoping esb ... "
-cat /opt/$WSO2_ESB_VERSION/wso2carbon.pid > kill
+/opt/$WSO2_ESB_VERSION/bin/wso2server.sh stop
 echo "stoping dss ... "
-cat /opt/$WSO2_DSS_VERSION/wso2carbon.pid > kill
+/opt/$WSO2_DSS_VERSION/bin/wso2server.sh stop
 echo "stoping is ... "
-cat /opt/$WSO2_IS_VERSION/wso2carbon.pid > kill
+/opt/$WSO2_IS_VERSION/bin/wso2server.sh stop
 
 echo "exited $0"
