@@ -44,4 +44,4 @@ COPY docker-entrypoint.sh /opt/startup.sh
 RUN chmod 700 /opt/startup.sh
 
 # will hand that over to kubernetes
-CMD ["/bin/bash", "-c", "/opt/startup.sh"]
+# CMD ["/bin/bash", "-c", "/opt/startup.sh"]
